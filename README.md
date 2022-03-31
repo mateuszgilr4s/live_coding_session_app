@@ -1,39 +1,15 @@
-# Symfony Docker
+Live coding sample app
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html), HTTP/3 and HTTPS support.
+to start project:
+docker-compose -f docker-compose.yml -f docker-compose.debug.yml -f docker-compose.override.yml up -d
 
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+code implements simple functionality of calculating needed time for performing Jobs.
 
-## Getting Started
+it has service to calculate needed time for job JobTimeCalculator.
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/)
-2. Run `docker-compose build --pull --no-cache` to build fresh images
-3. Run `docker-compose up` (the logs will be displayed in the current shell)
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. Run `docker-compose down --remove-orphans` to stop the Docker containers.
+There are two types of Jobs, Simple job consists list of tasks from which time is calculating.
+Composite jobs it consists multiple simple or more composite jobs. Time is calculated  recursively in that case.
+Problem in application is when composite jobs are "looped" as seen in repository:
+compositeC is depending on compositeB, b is depending on compositeA and compositeA is depending on compositeC making calculating of c impossible.
 
-## Features
-
-* Production, development and CI ready
-* Automatic HTTPS (in dev and in prod!)
-* HTTP/2, HTTP/3 and [Preload](https://symfony.com/doc/current/web_link.html) support
-* Built-in [Mercure](https://symfony.com/doc/current/mercure.html) hub
-* [Vulcain](https://vulcain.rocks) support
-* Just 2 services (PHP FPM and Caddy server)
-* Super-readable configuration
-
-**Enjoy!**
-
-## Docs
-
-1. [Build options](docs/build.md)
-2. [Using Symfony Docker with an existing project](docs/existing-project.md)
-3. [Support for extra services](docs/extra-services.md)
-4. [Deploying in production](docs/production.md)
-5. [Installing Xdebug](docs/xdebug.md)
-6. [Using a Makefile](docs/makefile.md)
-7. [Troubleshooting](docs/troubleshooting.md)
-
-## Credits
-
-Created by [Kévin Dunglas](https://dunglas.fr), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+Goal of that coding session is to add functionality of detecting circular dependency and handle it differently than letting progam go in to infinite loop.
