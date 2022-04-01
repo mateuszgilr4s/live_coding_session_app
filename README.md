@@ -3,6 +3,9 @@ Live coding sample app
 to start project:
 docker-compose -f docker-compose.yml -f docker-compose.debug.yml -f docker-compose.override.yml up -d
 
+xdebug config:
+https://github.com/dunglas/symfony-docker/blob/main/docs/xdebug.md#debugging-with-xdebug-and-phpstorm
+
 code implements simple functionality of calculating needed time for performing Jobs.
 
 it has service to calculate needed time for job JobTimeCalculator.
